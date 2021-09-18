@@ -1,6 +1,9 @@
+import { User } from './../../../../api-interfaces/src/lib/api-interfaces';
+import { AuthService } from './../../../../core-data/src/lib/services/authentication/auth.service';
+import { NotificationsService } from '@public-apis/core-data';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -9,25 +12,52 @@ import { Router } from "@angular/router";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  userInfo: User = { email: 'davemccutch@gmail.com', password: 'abc'};
   form: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
-    ) {}
+    private router: Router,
+    private notify: NotificationsService,
+    private authservice: AuthService
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.initForm();
   }
 
-  login() {
-    if (this.form.invalid) return;
-    this.router.navigate(['/entries']);
-  }
+  //PRACTICING BELOW
+
+
+  // login() {
+  //   const inputedUser: User = this.form.value;
+  //   if (inputedUser.email === this.userInfo.email && inputedUser.password === this.userInfo.password)
+  //   return (this.authservice.setToken(inputedUser.email),
+  //   this.notify.notify('Successfully Logged In'),
+  //   this.router.navigate(['/entries'])); else return  (this.notify.notify('Invalid User'), false); 
+  // };
+
+    // login() {
+    //   const inputedUser: User = this.form.value;
+    //   const pass =
+    //   this.authservice.setToken(inputedUser.email);
+    //   this.notify.notify('Successfully Loggin In');
+    //   this.router.navigate(['/entries']);
+    //   const fail = this.notify.notify('Invalid User');
+    //   if (inputedUser.email === this.userInfo.email && inputedUser.password === this.userInfo.password) return {pass};
+    //   else return {fail};}
+
+    login() {
+      const inputedUser: User = this.form.value;
+      return (inputedUser.email === this.userInfo.email && inputedUser.password === this.userInfo.password ? (this.authservice.setToken(inputedUser.email), this.notify.notify('Successfully Logged In'), this.router.navigate(['/entries'])) : this.notify.notify('Invalid User'));
+    }
+
+
+
 
   private initForm() {
     this.form = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }

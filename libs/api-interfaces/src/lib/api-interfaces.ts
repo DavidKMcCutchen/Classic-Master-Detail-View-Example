@@ -13,6 +13,11 @@ export interface ApiPagination {
   Category: string;
 };
 
+export interface User {
+  email: string,
+  password: string
+}
+
 export const emptyAPI = {
   API: '',
   Description: '',
