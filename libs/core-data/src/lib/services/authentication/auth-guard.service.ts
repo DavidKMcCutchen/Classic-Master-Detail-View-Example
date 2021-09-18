@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate{
 
   canActivate() {
     if(!this.authService.isAuthenticated.value) {
-      this.notify.notify('Invaild User');
+      this.notify.notify('Invalid User');
       return false
     } else {
       this.notify.notify('Succesfully Logged In');
