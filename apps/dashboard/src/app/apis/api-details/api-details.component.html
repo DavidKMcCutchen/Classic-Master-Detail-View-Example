@@ -9,7 +9,16 @@
       </h1>
     </mat-card-title>
   </mat-card-header>
-  <form
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Public API Directory Creator
+      </mat-panel-title>
+      <mat-panel-description>
+        Create a Directory Listing Within
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form
     [formGroup]="form"
     #formDirective="ngForm"
     (ngSubmit)="save(formDirective)"
@@ -51,17 +60,7 @@
             <mat-error *ngIf="form.get('Auth')">Required Field</mat-error>
           </mat-form-field>
 
-            <mat-form-field appearance="outline" class="full-width" floatLabel="always">
-              <mat-label>HTTPS</mat-label>
-              <input
-                matInput
-                placeholder="HTTPS"
-                formControlName="HTTPS"
-                type="text"
-                name="HTTPS"
-              />
-              <mat-error *ngIf="form.get('HTTPS')">Required Field</mat-error>
-            </mat-form-field>
+            
 
               <mat-form-field appearance="outline" class="full-width" floatLabel="always">
                 <mat-label>Cors</mat-label>
@@ -99,6 +98,30 @@
                     <mat-error *ngIf="form.get('Cors')">Required Field</mat-error>
                   </mat-form-field>
 
+                  <section>
+                    <mat-checkbox color="primary" formControlName="HTTPS" placeholder="HTTPS"
+                      >HTTPS?</mat-checkbox
+                    >
+                    <mat-error *ngIf="form.get('HTTPS')"Required Field></mat-error>
+                  </section>
+
+                  <!-- <section class="full-width">
+                    <mat-label>
+                      Slider  :
+                      {{ this.form.get('example')?.value }}
+                    </mat-label>
+
+                    <mat-slider
+                      class="full-width"
+                      formControlName="example"
+                      min="0"
+                      max="200"
+                      thumbLabel
+                      name="example"
+                      tickInterval="10"
+                    ></mat-slider>
+                  </section> -->
+
 
 
 
@@ -117,4 +140,6 @@
       <button type="button" mat-button (click)="cancel()">Cancel</button>
     </mat-card-actions>
   </form>
+  </mat-expansion-panel>
+  
 </mat-card>

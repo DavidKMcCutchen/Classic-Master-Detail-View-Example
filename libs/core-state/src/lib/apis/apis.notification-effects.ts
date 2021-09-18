@@ -35,6 +35,15 @@ export class NotificationEffects {
     { dispatch: false }
   );
 
+  loadAllSuccessNotification$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(APIsActions.loadAPIsSuccess),
+        tap(() => this.notificationService.notify('Load APIs Successful'))
+      ),
+    { dispatch: false }
+  );
+
   constructor(
     private actions$: Actions,
     private notificationService: NotificationsService
