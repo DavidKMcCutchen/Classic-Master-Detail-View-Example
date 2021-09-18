@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{api?.API}}</mat-card-title>
+    <mat-card-subtitle>API Directory</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+        <p matLine> Description: {{api?.Description}}</p>
+        <p matLine> Auth: {{api?.Auth}}</p>
+        <p matLine> HTTPS: {{api?.HTTPS}}</p>
+        <p matLine> Cors: {{api?.Cors}}</p>
+        <p matLine> Link: {{api?.Link}}</p>
+        <p matLine> Category: {{api?.Category}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="navigateBack()">Return</button>
+  </mat-card-actions>
+</mat-card>

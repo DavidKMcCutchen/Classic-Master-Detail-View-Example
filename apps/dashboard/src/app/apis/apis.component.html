@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="col-50" layout="row" layout-align="center center">
+      <public-apis-api-list
+        [apis]="allAPIs$ | async"
+        (selected)="selectAPI($event)"
+        (deleted)="deleteAPI($event)"
+        (apiViewed)="viewAPI($event)"
+      ></public-apis-api-list>
+    </div>
+    <div class="col-50" layout="row" layout-align="center center">
+      <public-apis-api-details
+        [api]="selectedAPI$ | async"
+        (saved)="saveAPI($event)"
+        (cancelled)="resetAPI()"
+        [form]="form"
+      ></public-apis-api-details>
+    </div>
+  </div>

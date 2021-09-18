@@ -1,0 +1,7 @@
+<div class="container">
+  <div class="col-50" layout="row" layout-align="center center">
+<div *ngIf="currentAPI$ | async as api">
+  <public-apis-api-info [api]="currentAPI$ | async"></public-apis-api-info>
+</div>
+</div>
+</div>

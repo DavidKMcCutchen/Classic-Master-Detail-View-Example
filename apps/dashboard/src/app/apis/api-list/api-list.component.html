@@ -1,0 +1,29 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h1>Public APIs List</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let api of apis" data-test="api-list-item" (click)="selected.emit(api)">
+        <h3 matLine>{{api.API}}</h3>
+        <p matLine> Description: {{api.Description}}</p>
+        <p matLine> Auth: {{api.Auth}}</p>
+        <p matLine> HTTPS: {{api.HTTPS}}</p>
+        <p matLine> Cors: {{api.Cors}}</p>
+        <p matLine> Link: {{api.Link}}</p>
+        <p matLine> Category: {{api.Category}}</p>
+        
+        <button mat-icon-button (click)="apiViewed.emit(api.API); $event.stopImmediatePropagation()">
+          <mat-icon *ngIf="!readonly">chevron_left</mat-icon>
+        </button>
+
+
+        <button mat-icon-button (click)="deleted.emit(api); $event.stopImmediatePropagation()">
+          <mat-icon *ngIf="!readonly">delete</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

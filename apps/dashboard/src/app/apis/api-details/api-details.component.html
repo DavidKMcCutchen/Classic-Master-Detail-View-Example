@@ -1,0 +1,120 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h1>
+        <span *ngIf="currentAPI.API; else elseBlock">{{
+          originalTitle
+        }}</span>
+        <ng-template #elseBlock>Create a Public API Directory Listing</ng-template>
+      </h1>
+    </mat-card-title>
+  </mat-card-header>
+  <form
+    [formGroup]="form"
+    #formDirective="ngForm"
+    (ngSubmit)="save(formDirective)"
+  >
+    <mat-card-content>
+      <mat-form-field appearance="outline" class="full-width" floatLabel="always">
+        <mat-label>API</mat-label>
+        <input
+          matInput
+          placeholder="API"
+          formControlName="API"
+          type="text"
+          name="API"
+        />
+        <mat-error *ngIf="form.get('API')">Required Field</mat-error>
+      </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width" floatLabel="always">
+          <mat-label>Description</mat-label>
+          <input
+            matInput
+            placeholder="Description"
+            formControlName="Description"
+            type="text"
+            name="Description"
+          />
+          <mat-error *ngIf="form.get('Description')">Required Field</mat-error>
+        </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width" floatLabel="always">
+            <mat-label>Auth</mat-label>
+            <input
+              matInput
+              placeholder="Auth"
+              formControlName="Auth"
+              type="text"
+              name="Auth"
+            />
+            <mat-error *ngIf="form.get('Auth')">Required Field</mat-error>
+          </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width" floatLabel="always">
+              <mat-label>HTTPS</mat-label>
+              <input
+                matInput
+                placeholder="HTTPS"
+                formControlName="HTTPS"
+                type="text"
+                name="HTTPS"
+              />
+              <mat-error *ngIf="form.get('HTTPS')">Required Field</mat-error>
+            </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width" floatLabel="always">
+                <mat-label>Cors</mat-label>
+                <input
+                  matInput
+                  placeholder="Cors"
+                  formControlName="Cors"
+                  type="text"
+                  name="Cors"
+                />
+                <mat-error *ngIf="form.get('Cors')">Required Field</mat-error>
+              </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width" floatLabel="always">
+                  <mat-label>Link</mat-label>
+                  <input
+                    matInput
+                    placeholder="Link"
+                    formControlName="Link"
+                    type="text"
+                    name="Link"
+                  />
+                  <mat-error *ngIf="form.get('Link')">Required Field</mat-error>
+                </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="full-width" floatLabel="always">
+                    <mat-label>Category</mat-label>
+                    <input
+                      matInput
+                      placeholder="Category"
+                      formControlName="Category"
+                      type="text"
+                      name="Category"
+                    />
+                    <mat-error *ngIf="form.get('Cors')">Required Field</mat-error>
+                  </mat-form-field>
+
+
+
+
+
+
+      <section class="full-width">
+      </section>
+
+
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="submit" mat-button color="primary">
+        {{ originalTitle ? 'Save' : 'Create' }}
+      </button>
+      <button type="button" mat-button (click)="cancel()">Cancel</button>
+    </mat-card-actions>
+  </form>
+</mat-card>
