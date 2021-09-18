@@ -38,7 +38,7 @@ export class APIsComponent implements OnInit {
   }
 
   viewAPI(apiId: string) {
-    this.router.navigate(["API", apiId])
+    this.router.navigate(["entries", apiId])
   }
 
   loadAPI(apiId: string) {
