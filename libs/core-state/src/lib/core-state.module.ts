@@ -1,3 +1,4 @@
+import { FeaturesAuthEffects } from './auth/auth.effects';
 import { NotificationEffects } from './apis/apis.notification-effects';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -25,7 +26,7 @@ const storeConfig: RootStoreConfig<any> = {
     CommonModule,
     CoreDataModule,
     StoreModule.forRoot(reducers, storeConfig),
-    EffectsModule.forRoot([APIEffects, NotificationEffects]),
+    EffectsModule.forRoot([APIEffects, NotificationEffects, FeaturesAuthEffects]),
     StoreDevtoolsModule.instrument({ name: store_name })
   ],
   providers: []

@@ -1,26 +1,22 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from './auth.service';
-import { CanActivate, Router } from '@angular/router'
-import { NotificationsService } from '../notifications/notifications.service';
+import { CanActivate, Router, UrlTree } from '@angular/router';
+import { FeaturesAuthFacade } from '@public-apis/core-state';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class AuthGuard implements CanActivate{
+export class FeaturesAuthGuard implements CanActivate {
+  constructor(public router: Router, private authFacade: FeaturesAuthFacade) {}
 
-  constructor(
-    private route: Router,
-    private authService: AuthService,
-    private notify: NotificationsService
-    ) { }
-
-  canActivate() {
-    if(!this.authService.isAuthenticated.value) {
-      this.notify.notify('Invalid User');
-      return false
-    } else {
-      this.notify.notify('Succesfully Logged In');
-      return true;
-    }
+  canActivate(): Observable<boolean | UrlTree> {
+    return this.authFacade.isUserAuthenticated$.pipe(
+      map((userAuthenticated) => {
+        if (userAuthenticated) return true;
+        this.router.navigateByUrl('/login');
+        return false;
+      })
+    );
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { API, emptyAPI } from '@public-apis/api-interfaces';
 import { APIFacade } from '@public-apis/core-state';
@@ -74,5 +74,11 @@ export class APIsComponent implements OnInit {
       Link: ['', Validators.required],
       Category: ['', Validators.required]
     })
+  }};
+
+  export function forbiddenItemsValidator(nameRe: RegExp): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const forbidden = nameRe.test(control.value);
+      return forbidden ? { forbiddenItem: { value: control.value } } : null;
+    };
   }
-}

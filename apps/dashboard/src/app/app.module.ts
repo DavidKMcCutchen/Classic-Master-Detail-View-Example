@@ -17,6 +17,7 @@ import { EnvironmentModule } from '@public-apis/environment';
 import { UiLoginModule } from '@public-apis/ui-login';
 import { APIComponent } from './api/api.component';
 import { ApiInfoComponent } from './api/api-info/api-info.component';
+import { PipesModule } from 'libs/pipes/src/lib/pipes.module';
 
 @NgModule({
   declarations: [AppComponent, APIsComponent, ApiDetailsComponent, ApiListComponent, ApiInfoComponent, APIComponent],
@@ -32,7 +33,8 @@ import { ApiInfoComponent } from './api/api-info/api-info.component';
     EnvironmentModule.withEnvironment(environment),
     FormsModule,
     ReactiveFormsModule,
-    CommonModule],
+    CommonModule,
+    PipesModule],
   providers: [],
   bootstrap: [AppComponent],
 })

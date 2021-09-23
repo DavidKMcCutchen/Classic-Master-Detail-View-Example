@@ -1,29 +1,39 @@
-import { Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { APIEnvironment, API_ENVIRONMENT } from "@public-apis/environment";
+
+export const TOKEN_NAME = 'cs-sample::token';
+export const MODEL = 'auth';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class AuthService implements OnInit{
-  isAuthenticated = new BehaviorSubject(false);
+export class FeaturesAuthService {
+  constructor(
+    @Inject(API_ENVIRONMENT) private config: APIEnvironment,
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
-  constructor() {
-  }
-  ngOnInit() {
-    // tslint:disable-next-line: no-unused-expression
-    this.getToken() || ''
-  }
-
-  setToken(token) {
-    localStorage.setItem('user_Token', token);
-    this.isAuthenticated.next(token);
+  getToken(): string | null {
+    return localStorage.getItem(TOKEN_NAME);
   }
 
-  getToken() {
-    return localStorage.getItem('user_Token');
+  setToken(token: string | null): void {
+    localStorage.setItem(TOKEN_NAME, token ?? 'null');
   }
 
-  logout() {
-    this.setToken('')
+  login(loginData: any): Observable<{ access_token: string }> {
+    return this.http.post<{ access_token: string }>(
+      `${this.config.apiUrl}${MODEL}/login`,
+      loginData
+    );
+  }
+
+  logout(): void {
+    this.setToken(null);
+    this.router.navigate(['/login']);
   }
 }

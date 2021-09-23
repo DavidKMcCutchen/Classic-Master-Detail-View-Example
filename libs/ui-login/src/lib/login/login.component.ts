@@ -1,9 +1,9 @@
-import { User } from './../../../../api-interfaces/src/lib/api-interfaces';
-import { AuthService } from './../../../../core-data/src/lib/services/authentication/auth.service';
+import { ErrorKeysPipe, validationMessages } from './../../../../pipes/src/lib/pipes/error-keys.pipe';
 import { NotificationsService } from '@public-apis/core-data';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FeaturesAuthFacade } from '@public-apis/core-state';
 
 
 @Component({
@@ -12,53 +12,46 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  userInfo: User = { email: 'davemccutch@gmail.com', password: 'abc'};
-  form: FormGroup;
+  form!: FormGroup;
+  isPasswordField = true;
+  messages = validationMessages;
+
+  get passwordIcon(): string {
+    return this.isPasswordField ? 'visibility_off' : 'visibility';
+  }
+
+  get passwordFieldType(): string {
+    return this.isPasswordField ? 'password' : 'text';
+  }
 
   constructor(
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private notify: NotificationsService,
-    private authservice: AuthService
-  ) { }
+    private formBuild: FormBuilder,
+    private authFacade: FeaturesAuthFacade
+  ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initForm();
   }
 
-  //PRACTICING BELOW
-
-
-  // login() {
-  //   const inputedUser: User = this.form.value;
-  //   if (inputedUser.email === this.userInfo.email && inputedUser.password === this.userInfo.password)
-  //   return (this.authservice.setToken(inputedUser.email),
-  //   this.notify.notify('Successfully Logged In'),
-  //   this.router.navigate(['/entries'])); else return  (this.notify.notify('Invalid User'), false); 
-  // };
-
-    // login() {
-    //   const inputedUser: User = this.form.value;
-    //   const pass =
-    //   this.authservice.setToken(inputedUser.email);
-    //   this.notify.notify('Successfully Loggin In');
-    //   this.router.navigate(['/entries']);
-    //   const fail = this.notify.notify('Invalid User');
-    //   if (inputedUser.email === this.userInfo.email && inputedUser.password === this.userInfo.password) return {pass};
-    //   else return {fail};}
-
-    login() {
-      const inputedUser: User = this.form.value;
-      return (inputedUser.email === this.userInfo.email && inputedUser.password === this.userInfo.password ? (this.authservice.setToken(inputedUser.email), this.notify.notify('Successfully Logged In'), this.router.navigate(['/entries'])) : this.notify.notify('Invalid User'));
-    }
-
-
-
+  loginAttempt() {
+    if (!this.form.valid) return;
+    this.authFacade.loginRequest(this.form.value);
+  }
 
   private initForm() {
-    this.form = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+    this.form = this.formBuild.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(12),
+          Validators.pattern(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,12}$/g
+          ),
+        ],
+      ],
     });
   }
 }

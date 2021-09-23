@@ -22,6 +22,7 @@
       "@public-apis/core-state": ["libs/core-state/src/index.ts"],
       "@public-apis/environment": ["libs/environment/src/index.ts"],
       "@public-apis/material": ["libs/material/src/index.ts"],
+      "@public-apis/pipes": ["libs/pipes/src/index.ts"],
       "@public-apis/theme": ["libs/theme/src/index.ts"],
       "@public-apis/ui-login": ["libs/ui-login/src/index.ts"]
     }

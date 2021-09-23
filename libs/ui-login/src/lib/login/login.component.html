@@ -1,48 +1,40 @@
-<mat-card class="mat-elevation-z1">
-<mat-card-header>
-  <mat-card-title>
-        <h2>Login</h2>
-      </mat-card-title>
-    </mat-card-header>
-    <form [formGroup]="form" (submit)="login()">
-      <mat-card-content>
-        <mat-form-field appearance="outline" class="w-100">
+<div class="login-container">
+  <mat-card>
+    <form [formGroup]="form" (submit)="loginAttempt()">
+      <mat-card-content class="d-flex flex-column">
+        <mat-form-field>
           <mat-label>Email</mat-label>
-          <input
-            matInput
-            type="text"
-            placeholder="Enter Email"
-            formControlName="email"
-            autocomplete="email"
-          />
-          <mat-error *ngIf="form.get('email')">Required Field</mat-error>
-          <mat-hint>davemccutch@gmail.com</mat-hint>
+          <input matInput placeholder="Email" formControlName="email" />
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-hint>victor@avila.com</mat-hint>
+          <mat-error
+            *ngFor="let error of form.get('email')?.errors | csErrorKeys"
+          >
+            {{ messages[error] }}
+          </mat-error>
         </mat-form-field>
-  
-        <mat-form-field appearance="outline" class="w-100">
+        <mat-form-field>
           <mat-label>Password</mat-label>
           <input
             matInput
-            type="password"
-            placeholder="Enter Password"
+            [type]="passwordFieldType"
+            placeholder="Password"
             formControlName="password"
-            autocomplete="current-password"
           />
-          <mat-error *ngIf="form.get('password')">Required Field</mat-error>
-          <mat-hint>abc</mat-hint>
+          <mat-icon matSuffix (click)="isPasswordField = !isPasswordField">{{
+            passwordIcon
+          }}</mat-icon>
+          <mat-hint>Secret9%"</mat-hint>
+          <mat-error
+            *ngFor="let error of form.get('password')?.errors | csErrorKeys"
+          >
+            {{ messages[error] }}
+          </mat-error>
         </mat-form-field>
       </mat-card-content>
-  
-      <mat-card-actions class="btn-style">
-        <button
-          mat-raised-button
-          [disabled]="form.invalid"
-          color="primary"
-          type="submit"
-          class="ml-2"
-        >
-          Login
-        </button>
+      <mat-card-actions class="d-flex justify-content-end m-0 p-0">
+        <button type="submit" mat-raised-button color="primary">Login</button>
       </mat-card-actions>
     </form>
   </mat-card>
+</div>

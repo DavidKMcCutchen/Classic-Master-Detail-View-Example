@@ -9,15 +9,7 @@
       </h1>
     </mat-card-title>
   </mat-card-header>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Public API Directory Creator
-      </mat-panel-title>
-      <mat-panel-description>
-        Create a Directory Listing Within
-      </mat-panel-description>
-    </mat-expansion-panel-header>
+  
     <form
     [formGroup]="form"
     #formDirective="ngForm"
@@ -140,6 +132,4 @@
       <button type="button" mat-button (click)="cancel()">Cancel</button>
     </mat-card-actions>
   </form>
-  </mat-expansion-panel>
-  
 </mat-card>
