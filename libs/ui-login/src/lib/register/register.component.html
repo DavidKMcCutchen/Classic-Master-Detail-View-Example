@@ -1,4 +1,4 @@
-<div class="login-container">
+<div class="register-container">
   <mat-card>
     <form [formGroup]="form" (submit)="registerAttempt()">
       <mat-card-content class="d-flex flex-column">
@@ -6,6 +6,7 @@
           <mat-label>Email</mat-label>
           <input matInput placeholder="Email" formControlName="email" />
           <mat-icon matSuffix>email</mat-icon>
+          <mat-hint>Example: example@gmail.com</mat-hint>
           <mat-error
             *ngFor="let error of form.get('email')?.errors | csErrorKeys"
           >
@@ -23,6 +24,7 @@
           <mat-icon matSuffix (click)="isPasswordField = !isPasswordField">{{
             passwordIcon
           }}</mat-icon>
+          <mat-hint>Must contain an upper case letter, lower case letter, a number and symbol.  Minimum 6 characters. </mat-hint>
           <mat-error
             *ngFor="let error of form.get('password')?.errors | csErrorKeys"
           >
