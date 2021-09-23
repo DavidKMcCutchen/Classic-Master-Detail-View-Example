@@ -27,6 +27,10 @@ export class FeaturesAuthFacade {
     this.dispatch(authActions.logoutClicked());
   };
 
+  register() {
+    this.dispatch(authActions.registerClicked());
+  }
+
   private dispatch(action: Action) {
     this.store.dispatch(action)
   }

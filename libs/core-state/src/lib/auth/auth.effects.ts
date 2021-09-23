@@ -48,6 +48,14 @@ export class FeaturesAuthEffects {
     tap(() => this.authService.logout())
   ),
   { dispatch: false }
+  );
+
+  userRegister$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(authActions.registerClicked),
+    tap(() => this.authService.register())
+  ),
+  { dispatch: false }
   )
 
 

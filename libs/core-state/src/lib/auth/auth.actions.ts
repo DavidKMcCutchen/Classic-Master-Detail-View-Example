@@ -19,6 +19,10 @@ export const logoutClicked = createAction(
   '[AUTH/API] Logout Clicked'
 );
 
+export const registerClicked = createAction(
+  '[AUTH/API] Register Clicked'
+);
+
 export const hydrateToken = createAction(
   '[AUTH/LocalStorage] Hydrate Token',
   props <{ access_token: string}>()

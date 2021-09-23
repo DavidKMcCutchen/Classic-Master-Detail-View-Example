@@ -3,9 +3,25 @@
     {{title}}
   </span>
   <span class="spacer"></span>
-  <button *ngIf="isAuthenticated$ | async" mat-mini-fab (click)="logoutAttempt()">
+  <button *ngIf="isAuthenticated$ | async" mat-mini-fab (click)="logoutAttempt()" mat-raised-button #tooltip="matTooltip"
+  matTooltip="Logout"
+  [matTooltipPosition]="position.value"
+  matTooltipHideDelay="100000"
+  aria-label="Button that displays a tooltip that hides when scrolled out of the container"
+  class="example-button">
     <mat-icon>person</mat-icon>
   </button>
+
+  <button mat-mini-fab (click)="register()" mat-raised-button #tooltip="matTooltip"
+  matTooltip="Register"
+  [matTooltipPosition]="position.value"
+  matTooltipHideDelay="100000"
+  aria-label="Button that displays a tooltip that hides when scrolled out of the container"
+  class="example-button">
+    <mat-icon>account_box</mat-icon>
+  </button>
+
+  
 </mat-toolbar>
 
 <mat-sidenav-container class="sidenav-container">

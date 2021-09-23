@@ -30,10 +30,15 @@ export class FeaturesAuthService {
       `${this.config.apiUrl}${MODEL}/login`,
       loginData
     );
-  }
+    
+  };
 
   logout(): void {
     this.setToken(null);
     this.router.navigate(['/login']);
+  };
+
+  register(): void {
+    this.router.navigate(['/register'])
   }
 }

@@ -38,6 +38,9 @@ const reducer = createReducer(
   })),
   on(FeaturesAuthActions.logoutClicked, () => ({
     ...initialState,
+  })),
+  on(FeaturesAuthActions.registerClicked, () => ({
+    ...initialState
   }))
 );
 

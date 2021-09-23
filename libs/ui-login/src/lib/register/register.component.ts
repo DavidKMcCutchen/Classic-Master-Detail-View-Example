@@ -1,21 +1,22 @@
-import { ErrorKeysPipe, validationMessages } from './../../../../pipes/src/lib/pipes/error-keys.pipe';
-import { NotificationsService } from '@public-apis/core-data';
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FeaturesAuthFacade } from '@public-apis/core-state';
-
+import { Router } from '@angular/router';
+import { validationMessages } from 'libs/pipes/src/lib/pipes/error-keys.pipe';
 
 @Component({
-  selector: 'API-app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'public-apis-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   form!: FormGroup;
   isPasswordField = true;
   messages = validationMessages;
 
+  constructor(
+    private formBuild: FormBuilder,
+    private router: Router
+  ) { }
 
   get passwordIcon(): string {
     return this.isPasswordField ? 'visibility_off' : 'visibility';
@@ -25,19 +26,16 @@ export class LoginComponent implements OnInit {
     return this.isPasswordField ? 'password' : 'text';
   }
 
-  constructor(
-    private formBuild: FormBuilder,
-    private authFacade: FeaturesAuthFacade,
-    private router: Router
-  ) {}
-
   ngOnInit(): void {
     this.initForm();
   }
 
-  loginAttempt() {
-    if (!this.form.valid) return;
-    this.authFacade.loginRequest(this.form.value);
+  registerAttempt() {
+    return;
+  }
+
+  loginPage() {
+    this.router.navigateByUrl('/login')
   }
 
   private initForm() {
@@ -56,4 +54,5 @@ export class LoginComponent implements OnInit {
       ],
     });
   }
+
 }
