@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
 
   get passwordIcon(): string {
-    return this.isPasswordField ? 'visibility_off' : 'visibility';
+    return this.isPasswordField ? 'visibility' : 'visibility_off';
   }
 
   get passwordFieldType(): string {

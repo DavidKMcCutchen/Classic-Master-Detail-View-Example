@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://public-apis-auth.herokuapp.com/',
+  apiUrl: 'https://jwt-authserver22.herokuapp.com/',
 
 };
 
